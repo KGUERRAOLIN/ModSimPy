@@ -1,0 +1,690 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Final-China\_One\_Child\_Policy\_KGUERRA\_GTIGHE}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{the-question-we-want-to-explore-the-changes-in-population-caused-by-the-institution-of-chinas-one-child-policy.-the-policy-was-instituted-in-1979-in-attempt-to-limit-the-high-growth-rate-of-the-already-very-large-chinese-population.-from-the-formation-of-the-communist-government-in-1949-through-the-1960s-families-were-encouraged-to-have-as-many-children-as-possible-due-to-the-belief-that-it-was-good-for-the-nation.-in-the-1970s-the-chinese-government-began-to-consider-the-potential-effects-of-overpopulation-and-by-1979-the-policy-was-developed.-the-policy-applied-to-most-families-who-were-not-ethnic-minorities-or-rural-farmers-who-were-usually-allowed-two-children.-families-where-both-parents-were-only-children-were-usually-allowed-up-to-two-children.-in-practice-local-governments-enforced-the-policy-by-mandating-contraception-and-sometimes-abortion-on-couples-who-had-already-had-their-one-child.-the-societal-effects-of-this-practice-are-fairly-well-documented-abortions-were-disproportionately-used-when-expecting-females-and-female-children-were-neglected-or-abandoned.-what-is-less-agreed-upon-and-what-we-plan-to-study-is-whether-the-policy-was-effective-in-reducing-chinas-population-growth-rate.-we-will-study-this-question-by-projecting-the-population-of-china-over-the-time-period-of-the-one-child-policy-relative-to-similar-countries-and-comparing-the-predicted-population-with-the-historical-data.}{%
+\subparagraph{The Question: We want to explore the changes in population
+caused by the institution of China's one child policy. The policy was
+instituted in 1979 in attempt to limit the high growth rate of the
+already very large Chinese population. From the formation of the
+Communist government in 1949 through the 1960's, families were
+encouraged to have as many children as possible due to the belief that
+it was good for the nation. In the 1970's, the Chinese government began
+to consider the potential effects of overpopulation, and by 1979 the
+policy was developed. The policy applied to most families who were not
+ethnic minorities or rural farmers (who were usually allowed two
+children). Families where both parents were only-children were usually
+allowed up to two children. In practice, local governments enforced the
+policy by mandating contraception and sometimes abortion on couples who
+had already had their one child. The societal effects of this practice
+are fairly well documented: abortions were disproportionately used when
+expecting females, and female children were neglected or abandoned. What
+is less agreed upon, and what we plan to study, is whether the policy
+was effective in reducing China's population growth rate. We will study
+this question by projecting the population of China over the time period
+of the one child policy relative to similar countries and comparing the
+predicted population with the historical
+data.}\label{the-question-we-want-to-explore-the-changes-in-population-caused-by-the-institution-of-chinas-one-child-policy.-the-policy-was-instituted-in-1979-in-attempt-to-limit-the-high-growth-rate-of-the-already-very-large-chinese-population.-from-the-formation-of-the-communist-government-in-1949-through-the-1960s-families-were-encouraged-to-have-as-many-children-as-possible-due-to-the-belief-that-it-was-good-for-the-nation.-in-the-1970s-the-chinese-government-began-to-consider-the-potential-effects-of-overpopulation-and-by-1979-the-policy-was-developed.-the-policy-applied-to-most-families-who-were-not-ethnic-minorities-or-rural-farmers-who-were-usually-allowed-two-children.-families-where-both-parents-were-only-children-were-usually-allowed-up-to-two-children.-in-practice-local-governments-enforced-the-policy-by-mandating-contraception-and-sometimes-abortion-on-couples-who-had-already-had-their-one-child.-the-societal-effects-of-this-practice-are-fairly-well-documented-abortions-were-disproportionately-used-when-expecting-females-and-female-children-were-neglected-or-abandoned.-what-is-less-agreed-upon-and-what-we-plan-to-study-is-whether-the-policy-was-effective-in-reducing-chinas-population-growth-rate.-we-will-study-this-question-by-projecting-the-population-of-china-over-the-time-period-of-the-one-child-policy-relative-to-similar-countries-and-comparing-the-predicted-population-with-the-historical-data.}}
+
+    Methodology: Our first step was to plot the historical population data
+over time from 1955 on. This allows us to check the validity of our
+model; if our model shows similar populations to the past data, we may
+be able to use the model to project into the future. We will generate a
+population model using China's historical birth and death rates. Then,
+we will predict China's population into the one child policy using the
+birth and death rates of similar countries. Comparing the true
+population of China and our prediction, we can see the effects of the
+policy.
+
+    First, we will create our model based on the historical data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Configure Jupyter so figures appear in the notebook}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Configure Jupyter to display the assigned value after an assignment}
+        \PY{o}{\PYZpc{}}\PY{k}{config} InteractiveShell.ast\PYZus{}node\PYZus{}interactivity=\PYZsq{}last\PYZus{}expr\PYZus{}or\PYZus{}assign\PYZsq{}
+        
+        \PY{c+c1}{\PYZsh{} import functions from the modsim.py module}
+        \PY{k+kn}{from} \PY{n+nn}{modsim} \PY{k}{import} \PY{o}{*}
+        
+        \PY{k+kn}{from} \PY{n+nn}{pandas} \PY{k}{import} \PY{n}{read\PYZus{}html}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}past population statistics}
+        \PY{n}{popstats} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1415045928}\PY{p}{,} \PY{l+m+mi}{1409517397}\PY{p}{,} \PY{l+m+mi}{1403500365}\PY{p}{,} \PY{l+m+mi}{1397028553}\PY{p}{,} \PY{l+m+mi}{1359755102}\PY{p}{,} \PY{l+m+mi}{1321623490}\PY{p}{,} \PY{l+m+mi}{1283198970}\PY{p}{,} \PY{l+m+mi}{1239940004}\PY{p}{,} \PY{l+m+mi}{1172445200}\PY{p}{,} \PY{l+m+mi}{1070863389}\PY{p}{,} \PY{l+m+mi}{993877310}\PY{p}{,} \PY{l+m+mi}{920945083}\PY{p}{,} \PY{l+m+mi}{824788457}\PY{p}{,} \PY{l+m+mi}{722562183}\PY{p}{,} \PY{l+m+mi}{657686143}\PY{p}{,} \PY{l+m+mi}{610834396}\PY{p}{]}
+        \PY{n}{t} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2018}\PY{p}{,} \PY{l+m+mi}{2017}\PY{p}{,} \PY{l+m+mi}{2016}\PY{p}{,} \PY{l+m+mi}{2015}\PY{p}{,} \PY{l+m+mi}{2010}\PY{p}{,} \PY{l+m+mi}{2005}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} \PY{l+m+mi}{1995}\PY{p}{,} \PY{l+m+mi}{1990}\PY{p}{,} \PY{l+m+mi}{1985}\PY{p}{,} \PY{l+m+mi}{1980}\PY{p}{,} \PY{l+m+mi}{1975}\PY{p}{,} \PY{l+m+mi}{1970}\PY{p}{,} \PY{l+m+mi}{1965}\PY{p}{,} \PY{l+m+mi}{1960}\PY{p}{,} \PY{l+m+mi}{1955}\PY{p}{]}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{popstats}\PY{p}{)}
+        \PY{n}{decorate}\PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chinese Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population (billions)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The Model: We will represent the current population and parameters as a
+system variable. This system variable will be updated over time using an
+update function. Each simulation will be run within a runsimulation
+function. Using the historical birth and death rates, we can fairly
+closely match the graph of China's population.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}     Creates a function that can be used to plot results     \PYZsh{}}
+        \PY{c+c1}{\PYZsh{}                                                             \PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{k}{def} \PY{n+nf}{plot\PYZus{}results}\PY{p}{(}\PY{n}{timeseries}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{timeseries}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{popstats}\PY{p}{)}
+            \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}                            \PY{c+c1}{\PYZsh{}Labels the x\PYZhy{}axis \PYZdq{}year\PYZdq{}}
+                     \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chinese Population (billions)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}   \PY{c+c1}{\PYZsh{}Labels the y\PYZhy{}axis \PYZdq{}year\PYZdq{}}
+                     \PY{n}{title}\PY{o}{=}\PY{n}{title}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Defining the system.}
+        \PY{l+s+sd}{    pop \PYZhy{} population of China in 1960}
+        \PY{l+s+sd}{    birthrates \PYZhy{} annual birthrates in China from 1960 to 2016}
+        \PY{l+s+sd}{    deathrates \PYZhy{} annual deathrates in China from 1960 to 2016}
+        \PY{l+s+sd}{    t0 \PYZhy{} beginning year of model (1960)}
+        \PY{l+s+sd}{    tf \PYZhy{} final year of model (2016)}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{n}{pop} \PY{o}{=} \PY{l+m+mi}{657686143}
+        \PY{n}{birthrates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.02086}\PY{p}{,} \PY{l+m+mf}{0.01802}\PY{p}{,} \PY{l+m+mf}{0.03701}\PY{p}{,} \PY{l+m+mf}{0.04337}\PY{p}{,} \PY{l+m+mf}{0.03914}\PY{p}{,} \PY{l+m+mf}{0.03788}\PY{p}{,} \PY{l+m+mf}{0.03505}\PY{p}{,} \PY{l+m+mf}{0.03396}\PY{p}{,} \PY{l+m+mf}{0.03559}\PY{p}{,} \PY{l+m+mf}{0.03411}\PY{p}{,} \PY{l+m+mf}{0.03343}\PY{p}{,} \PY{l+m+mf}{0.03065}\PY{p}{,} \PY{l+m+mf}{0.02977}\PY{p}{,} \PY{l+m+mf}{0.02793}\PY{p}{,} \PY{l+m+mf}{0.02482}\PY{p}{,} \PY{l+m+mf}{0.02301}\PY{p}{,} \PY{l+m+mf}{0.01991}\PY{p}{,} \PY{l+m+mf}{0.01893}\PY{p}{,} \PY{l+m+mf}{0.01825}\PY{p}{,} \PY{l+m+mf}{0.01782}\PY{p}{,} \PY{l+m+mf}{0.01821}\PY{p}{,} \PY{l+m+mf}{0.02091}\PY{p}{,} \PY{l+m+mf}{0.02228}\PY{p}{,} \PY{l+m+mf}{0.02019}\PY{p}{,} \PY{l+m+mf}{0.0199}\PY{p}{,} \PY{l+m+mf}{0.02104}\PY{p}{,} \PY{l+m+mf}{0.02243}\PY{p}{,} \PY{l+m+mf}{0.02333}\PY{p}{,} \PY{l+m+mf}{0.02237}\PY{p}{,} \PY{l+m+mf}{0.02158}\PY{p}{,} \PY{l+m+mf}{0.02106}\PY{p}{,} \PY{l+m+mf}{0.01968}\PY{p}{,} \PY{l+m+mf}{0.01827}\PY{p}{,} \PY{l+m+mf}{0.01809}\PY{p}{,} \PY{l+m+mf}{0.0177}\PY{p}{,} \PY{l+m+mf}{0.01712}\PY{p}{,} \PY{l+m+mf}{0.01698}\PY{p}{,} \PY{l+m+mf}{0.01657}\PY{p}{,} \PY{l+m+mf}{0.01564}\PY{p}{,} \PY{l+m+mf}{0.01464}\PY{p}{,} \PY{l+m+mf}{0.01403}\PY{p}{,} \PY{l+m+mf}{0.01338}\PY{p}{,} \PY{l+m+mf}{0.01286}\PY{p}{,} \PY{l+m+mf}{0.01241}\PY{p}{,} \PY{l+m+mf}{0.01229}\PY{p}{,} \PY{l+m+mf}{0.0124}\PY{p}{,} \PY{l+m+mf}{0.01209}\PY{p}{,} \PY{l+m+mf}{0.0121}\PY{p}{,} \PY{l+m+mf}{0.01214}\PY{p}{,} \PY{l+m+mf}{0.01213}\PY{p}{,} \PY{l+m+mf}{0.0119}\PY{p}{,} \PY{l+m+mf}{0.01193}\PY{p}{,} \PY{l+m+mf}{0.0121}\PY{p}{,} \PY{l+m+mf}{0.01208}\PY{p}{,} \PY{l+m+mf}{0.01237}\PY{p}{,} \PY{l+m+mf}{0.01207}\PY{p}{,} \PY{l+m+mf}{0.012}\PY{p}{]}
+        \PY{n}{deathrates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.02543}\PY{p}{,} \PY{l+m+mf}{0.01424}\PY{p}{,} \PY{l+m+mf}{0.01002}\PY{p}{,} \PY{l+m+mf}{0.01004}\PY{p}{,} \PY{l+m+mf}{0.0115}\PY{p}{,} \PY{l+m+mf}{0.0095}\PY{p}{,} \PY{l+m+mf}{0.00883}\PY{p}{,} \PY{l+m+mf}{0.00843}\PY{p}{,} \PY{l+m+mf}{0.00821}\PY{p}{,} \PY{l+m+mf}{0.00803}\PY{p}{,} \PY{l+m+mf}{0.0076}\PY{p}{,} \PY{l+m+mf}{0.00732}\PY{p}{,} \PY{l+m+mf}{0.00761}\PY{p}{,} \PY{l+m+mf}{0.00704}\PY{p}{,} \PY{l+m+mf}{0.00734}\PY{p}{,} \PY{l+m+mf}{0.00732}\PY{p}{,} \PY{l+m+mf}{0.00725}\PY{p}{,} \PY{l+m+mf}{0.00687}\PY{p}{,} \PY{l+m+mf}{0.00625}\PY{p}{,} \PY{l+m+mf}{0.00621}\PY{p}{,} \PY{l+m+mf}{0.00634}\PY{p}{,} \PY{l+m+mf}{0.00636}\PY{p}{,} \PY{l+m+mf}{0.0066}\PY{p}{,} \PY{l+m+mf}{0.0069}\PY{p}{,} \PY{l+m+mf}{0.00682}\PY{p}{,} \PY{l+m+mf}{0.00678}\PY{p}{,} \PY{l+m+mf}{0.00686}\PY{p}{,} \PY{l+m+mf}{0.00672}\PY{p}{,} \PY{l+m+mf}{0.00664}\PY{p}{,} \PY{l+m+mf}{0.00654}\PY{p}{,} \PY{l+m+mf}{0.00667}\PY{p}{,} \PY{l+m+mf}{0.0067}\PY{p}{,} \PY{l+m+mf}{0.00664}\PY{p}{,} \PY{l+m+mf}{0.00664}\PY{p}{,} \PY{l+m+mf}{0.00649}\PY{p}{,} \PY{l+m+mf}{0.00657}\PY{p}{,} \PY{l+m+mf}{0.00656}\PY{p}{,} \PY{l+m+mf}{0.00651}\PY{p}{,} \PY{l+m+mf}{0.0065}\PY{p}{,} \PY{l+m+mf}{0.00646}\PY{p}{,} \PY{l+m+mf}{0.00645}\PY{p}{,} \PY{l+m+mf}{0.00643}\PY{p}{,} \PY{l+m+mf}{0.00641}\PY{p}{,} \PY{l+m+mf}{0.0064}\PY{p}{,} \PY{l+m+mf}{0.00642}\PY{p}{,} \PY{l+m+mf}{0.00651}\PY{p}{,} \PY{l+m+mf}{0.00681}\PY{p}{,} \PY{l+m+mf}{0.00693}\PY{p}{,} \PY{l+m+mf}{0.00706}\PY{p}{,} \PY{l+m+mf}{0.00708}\PY{p}{,} \PY{l+m+mf}{0.00711}\PY{p}{,} \PY{l+m+mf}{0.00714}\PY{p}{,} \PY{l+m+mf}{0.00715}\PY{p}{,} \PY{l+m+mf}{0.00716}\PY{p}{,} \PY{l+m+mf}{0.00716}\PY{p}{,} \PY{l+m+mf}{0.00711}\PY{p}{,} \PY{l+m+mf}{0.0073}\PY{p}{]}
+        \PY{n}{system} \PY{o}{=} \PY{n}{System}\PY{p}{(}\PY{n}{t0} \PY{o}{=} \PY{l+m+mi}{1960}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{2016}\PY{p}{,} \PY{n}{p0} \PY{o}{=} \PY{n}{pop}\PY{p}{)} \PY{c+c1}{\PYZsh{}Initial parameters are set}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} t0         1960
+        tf         2016
+        p0    657686143
+        dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Runs the simulation over the year 1960\PYZhy{}2016 using the historical birth/death rate of China.   }
+        \PY{l+s+sd}{   update \PYZhy{} update function}
+        \PY{l+s+sd}{   results \PYZhy{} time series containing the population each year}
+        \PY{l+s+sd}{   returns the time series}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{k}{def} \PY{n+nf}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update}\PY{p}{)}\PY{p}{:}
+            \PY{n}{results} \PY{o}{=} \PY{n}{TimeSeries}\PY{p}{(}\PY{p}{)}
+            \PY{n}{results}\PY{p}{[}\PY{n}{system}\PY{o}{.}\PY{n}{t0}\PY{p}{]} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{p0}
+            
+            \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{linrange}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t0}\PY{p}{,} \PY{n}{system}\PY{o}{.}\PY{n}{tf}\PY{p}{)}\PY{p}{:}
+                \PY{n}{results}\PY{p}{[}\PY{n}{t}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{update}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{)}
+                
+            \PY{k}{return} \PY{n}{results}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Updates the population each year based on birthrates and deathrates   }
+         \PY{l+s+sd}{   pop \PYZhy{} current population }
+         \PY{l+s+sd}{   t \PYZhy{} current year}
+         \PY{l+s+sd}{   returns the population of the next year}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{k}{def} \PY{n+nf}{update}\PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{)}\PY{p}{:}
+             \PY{n}{t} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{n}{birthrate} \PY{o}{=} \PY{n}{birthrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+             \PY{n}{deathrate} \PY{o}{=} \PY{n}{deathrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+             \PY{n}{growth1} \PY{o}{=} \PY{n}{pop} \PY{o}{*} \PY{n}{birthrate}
+             \PY{n}{deaths} \PY{o}{=} \PY{n}{deathrate} \PY{o}{*} \PY{n}{pop}
+             \PY{k}{return} \PY{n}{pop} \PY{o}{+} \PY{n}{growth1} \PY{o}{\PYZhy{}} \PY{n}{deaths}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Runs the simulation over the year 1960\PYZhy{}2016 using the historical birth/death rate of each country.   }
+         \PY{l+s+sd}{   update \PYZhy{} update function}
+         \PY{l+s+sd}{   results \PYZhy{} time series containing the population each year}
+         \PY{l+s+sd}{   returns the time series}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{k}{def} \PY{n+nf}{runsimulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update}\PY{p}{)}\PY{p}{:}
+             \PY{n}{results} \PY{o}{=} \PY{n}{TimeSeries}\PY{p}{(}\PY{p}{)}
+             \PY{n}{results}\PY{p}{[}\PY{n}{system}\PY{o}{.}\PY{n}{t0}\PY{p}{]} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{pop}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{linrange}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t0}\PY{p}{,} \PY{n}{system}\PY{o}{.}\PY{n}{tf}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{results}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{update}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{n}{system}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{results}\PY{p}{)}      \PY{c+c1}{\PYZsh{}Prints the results in a graph}
+             \PY{k}{return} \PY{n}{results}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{results} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update}\PY{p}{)}           \PY{c+c1}{\PYZsh{}The simulation is run}
+         \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{results}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chinese Population Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{}and the results are plotted}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Prediction: We are going to plug in the birth and death rates of the
+following list of countries for China after 1979 when the one child
+policy was instituted. Each were similar to China in the following ways
+which explain why we are using their historical data to predict China's
+growth through the period of the one child policy: United States - The
+United States has a large geographic area and was becoming an economic
+powerhouse, Brazil - Brazil was also quickly developing, largely rural,
+and had a large geographic area, Japan - Japan was also becoming one of
+the world's largest economies, Indonesia - Indonesia has a very large
+population with a high population growth rate.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}historical birth and death rates of each country}
+         \PY{n}{USbirthrates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0237}\PY{p}{,} \PY{l+m+mf}{0.0233}\PY{p}{,} \PY{l+m+mf}{0.0224}\PY{p}{,} \PY{l+m+mf}{0.0217}\PY{p}{,} \PY{l+m+mf}{0.0211}\PY{p}{,} \PY{l+m+mf}{0.0194}\PY{p}{,} \PY{l+m+mf}{0.0184}\PY{p}{,} \PY{l+m+mf}{0.0178}\PY{p}{,} \PY{l+m+mf}{0.0176}\PY{p}{,} \PY{l+m+mf}{0.0179}\PY{p}{,} \PY{l+m+mf}{0.0184}\PY{p}{,} \PY{l+m+mf}{0.0172}\PY{p}{,} \PY{l+m+mf}{0.0156}\PY{p}{,} \PY{l+m+mf}{0.0148}\PY{p}{,} \PY{l+m+mf}{0.0148}\PY{p}{,} \PY{l+m+mf}{0.0146}\PY{p}{,} \PY{l+m+mf}{0.0146}\PY{p}{,} \PY{l+m+mf}{0.0151}\PY{p}{,} \PY{l+m+mf}{0.015}\PY{p}{,} \PY{l+m+mf}{0.0156}\PY{p}{,} \PY{l+m+mf}{0.0159}\PY{p}{,} \PY{l+m+mf}{0.0158}\PY{p}{,} \PY{l+m+mf}{0.0159}\PY{p}{,} \PY{l+m+mf}{0.0156}\PY{p}{,} \PY{l+m+mf}{0.0156}\PY{p}{,} \PY{l+m+mf}{0.0158}\PY{p}{,} \PY{l+m+mf}{0.0156}\PY{p}{,} \PY{l+m+mf}{0.0157}\PY{p}{,} \PY{l+m+mf}{0.016}\PY{p}{,} \PY{l+m+mf}{0.0164}\PY{p}{,} \PY{l+m+mf}{0.0167}\PY{p}{,} \PY{l+m+mf}{0.0162}\PY{p}{,} \PY{l+m+mf}{0.0158}\PY{p}{,} \PY{l+m+mf}{0.0154}\PY{p}{,} \PY{l+m+mf}{0.015}\PY{p}{,} \PY{l+m+mf}{0.0146}\PY{p}{,} \PY{l+m+mf}{0.0144}\PY{p}{,} \PY{l+m+mf}{0.0142}\PY{p}{,} \PY{l+m+mf}{0.0143}\PY{p}{,} \PY{l+m+mf}{0.0142}\PY{p}{,} \PY{l+m+mf}{0.0144}\PY{p}{,} \PY{l+m+mf}{0.0141}\PY{p}{,} \PY{l+m+mf}{0.014}\PY{p}{,} \PY{l+m+mf}{0.0141}\PY{p}{,} \PY{l+m+mf}{0.014}\PY{p}{,} \PY{l+m+mf}{0.014}\PY{p}{,} \PY{l+m+mf}{0.0143}\PY{p}{,} \PY{l+m+mf}{0.0143}\PY{p}{,} \PY{l+m+mf}{0.014}\PY{p}{,} \PY{l+m+mf}{0.0135}\PY{p}{,} \PY{l+m+mf}{0.013}\PY{p}{,} \PY{l+m+mf}{0.0127}\PY{p}{,} \PY{l+m+mf}{0.0126}\PY{p}{,} \PY{l+m+mf}{0.0124}\PY{p}{,} \PY{l+m+mf}{0.0125}\PY{p}{,} \PY{l+m+mf}{0.0124}\PY{p}{,} \PY{l+m+mf}{0.0124}\PY{p}{]}\PY{p}{;}
+         \PY{n}{USdeathrates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0095}\PY{p}{,} \PY{l+m+mf}{0.0093}\PY{p}{,} \PY{l+m+mf}{0.0095}\PY{p}{,} \PY{l+m+mf}{0.0096}\PY{p}{,} \PY{l+m+mf}{0.0094}\PY{p}{,} \PY{l+m+mf}{0.0094}\PY{p}{,} \PY{l+m+mf}{0.0095}\PY{p}{,} \PY{l+m+mf}{0.0094}\PY{p}{,} \PY{l+m+mf}{0.0098}\PY{p}{,} \PY{l+m+mf}{0.0095}\PY{p}{,} \PY{l+m+mf}{0.0095}\PY{p}{,} \PY{l+m+mf}{0.0093}\PY{p}{,} \PY{l+m+mf}{0.0094}\PY{p}{,} \PY{l+m+mf}{0.0093}\PY{p}{,} \PY{l+m+mf}{0.0091}\PY{p}{,} \PY{l+m+mf}{0.0088}\PY{p}{,} \PY{l+m+mf}{0.0088}\PY{p}{,} \PY{l+m+mf}{0.0086}\PY{p}{,} \PY{l+m+mf}{0.0087}\PY{p}{,} \PY{l+m+mf}{0.0085}\PY{p}{,} \PY{l+m+mf}{0.0088}\PY{p}{,} \PY{l+m+mf}{0.0086}\PY{p}{,} \PY{l+m+mf}{0.0085}\PY{p}{,} \PY{l+m+mf}{0.0086}\PY{p}{,} \PY{l+m+mf}{0.0087}\PY{p}{,} \PY{l+m+mf}{0.0087}\PY{p}{,} \PY{l+m+mf}{0.0087}\PY{p}{,} \PY{l+m+mf}{0.0086}\PY{p}{,} \PY{l+m+mf}{0.0089}\PY{p}{,} \PY{l+m+mf}{0.0088}\PY{p}{,} \PY{l+m+mf}{0.0086}\PY{p}{,} \PY{l+m+mf}{0.0086}\PY{p}{,} \PY{l+m+mf}{0.0085}\PY{p}{,} \PY{l+m+mf}{0.0088}\PY{p}{,} \PY{l+m+mf}{0.0088}\PY{p}{,} \PY{l+m+mf}{0.0088}\PY{p}{,} \PY{l+m+mf}{0.0088}\PY{p}{,} \PY{l+m+mf}{0.0087}\PY{p}{,} \PY{l+m+mf}{0.0086}\PY{p}{,} \PY{l+m+mf}{0.0086}\PY{p}{,} \PY{l+m+mf}{0.0085}\PY{p}{,} \PY{l+m+mf}{0.0085}\PY{p}{,} \PY{l+m+mf}{0.0085}\PY{p}{,} \PY{l+m+mf}{0.0084}\PY{p}{,} \PY{l+m+mf}{0.0082}\PY{p}{,} \PY{l+m+mf}{0.0083}\PY{p}{,} \PY{l+m+mf}{0.0081}\PY{p}{,} \PY{l+m+mf}{0.008}\PY{p}{,} \PY{l+m+mf}{0.0081}\PY{p}{,} \PY{l+m+mf}{0.0079}\PY{p}{,} \PY{l+m+mf}{0.007995}\PY{p}{,} \PY{l+m+mf}{0.008073}\PY{p}{,} \PY{l+m+mf}{0.008102}\PY{p}{,} \PY{l+m+mf}{0.008215}\PY{p}{,} \PY{l+m+mf}{0.008237}\PY{p}{,} \PY{l+m+mf}{0.00844}\PY{p}{,} \PY{l+m+mf}{0.0084}\PY{p}{]}\PY{p}{;}
+         \PY{n}{BRZbirthrates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.042336}\PY{p}{,} \PY{l+m+mf}{0.042029}\PY{p}{,} \PY{l+m+mf}{0.041611}\PY{p}{,} \PY{l+m+mf}{0.041064}\PY{p}{,} \PY{l+m+mf}{0.040392}\PY{p}{,} \PY{l+m+mf}{0.03961}\PY{p}{,} \PY{l+m+mf}{0.038741}\PY{p}{,} \PY{l+m+mf}{0.037833}\PY{p}{,} \PY{l+m+mf}{0.036934}\PY{p}{,} \PY{l+m+mf}{0.03608}\PY{p}{,} \PY{l+m+mf}{0.03531}\PY{p}{,} \PY{l+m+mf}{0.034654}\PY{p}{,} \PY{l+m+mf}{0.034112}\PY{p}{,} \PY{l+m+mf}{0.033675}\PY{p}{,} \PY{l+m+mf}{0.033337}\PY{p}{,} \PY{l+m+mf}{0.033083}\PY{p}{,} \PY{l+m+mf}{0.032894}\PY{p}{,} \PY{l+m+mf}{0.032734}\PY{p}{,} \PY{l+m+mf}{0.032563}\PY{p}{,} \PY{l+m+mf}{0.032351}\PY{p}{,} \PY{l+m+mf}{0.032059}\PY{p}{,} \PY{l+m+mf}{0.031655}\PY{p}{,} \PY{l+m+mf}{0.031135}\PY{p}{,} \PY{l+m+mf}{0.030508}\PY{p}{,} \PY{l+m+mf}{0.029783}\PY{p}{,} \PY{l+m+mf}{0.028982}\PY{p}{,} \PY{l+m+mf}{0.028134}\PY{p}{,} \PY{l+m+mf}{0.027278}\PY{p}{,} \PY{l+m+mf}{0.026452}\PY{p}{,} \PY{l+m+mf}{0.025677}\PY{p}{,} \PY{l+m+mf}{0.024979}\PY{p}{,} \PY{l+m+mf}{0.02437}\PY{p}{,} \PY{l+m+mf}{0.023838}\PY{p}{,} \PY{l+m+mf}{0.023365}\PY{p}{,} \PY{l+m+mf}{0.02294}\PY{p}{,} \PY{l+m+mf}{0.02254}\PY{p}{,} \PY{l+m+mf}{0.022139}\PY{p}{,} \PY{l+m+mf}{0.021716}\PY{p}{,} \PY{l+m+mf}{0.021256}\PY{p}{,} \PY{l+m+mf}{0.020753}\PY{p}{,} \PY{l+m+mf}{0.020204}\PY{p}{,} \PY{l+m+mf}{0.019618}\PY{p}{,} \PY{l+m+mf}{0.019016}\PY{p}{,} \PY{l+m+mf}{0.01842}\PY{p}{,} \PY{l+m+mf}{0.017845}\PY{p}{,} \PY{l+m+mf}{0.01731}\PY{p}{,} \PY{l+m+mf}{0.016832}\PY{p}{,} \PY{l+m+mf}{0.016413}\PY{p}{,} \PY{l+m+mf}{0.016053}\PY{p}{,} \PY{l+m+mf}{0.015749}\PY{p}{,} \PY{l+m+mf}{0.015492}\PY{p}{,} \PY{l+m+mf}{0.015269}\PY{p}{,} \PY{l+m+mf}{0.01506}\PY{p}{,} \PY{l+m+mf}{0.014852}\PY{p}{,} \PY{l+m+mf}{0.014635}\PY{p}{,} \PY{l+m+mf}{0.014405}\PY{p}{,} \PY{l+m+mf}{0.014163}\PY{p}{]}\PY{p}{;}
+         \PY{n}{BRZdeathrates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.013315}\PY{p}{,} \PY{l+m+mf}{0.013002}\PY{p}{,} \PY{l+m+mf}{0.01268}\PY{p}{,} \PY{l+m+mf}{0.012351}\PY{p}{,} \PY{l+m+mf}{0.012017}\PY{p}{,} \PY{l+m+mf}{0.011681}\PY{p}{,} \PY{l+m+mf}{0.011345}\PY{p}{,} \PY{l+m+mf}{0.011015}\PY{p}{,} \PY{l+m+mf}{0.010696}\PY{p}{,} \PY{l+m+mf}{0.010393}\PY{p}{,} \PY{l+m+mf}{0.010116}\PY{p}{,} \PY{l+m+mf}{0.009872}\PY{p}{,} \PY{l+m+mf}{0.009661}\PY{p}{,} \PY{l+m+mf}{0.009484}\PY{p}{,} \PY{l+m+mf}{0.009337}\PY{p}{,} \PY{l+m+mf}{0.009215}\PY{p}{,} \PY{l+m+mf}{0.00911}\PY{p}{,} \PY{l+m+mf}{0.009014}\PY{p}{,} \PY{l+m+mf}{0.008917}\PY{p}{,} \PY{l+m+mf}{0.008814}\PY{p}{,} \PY{l+m+mf}{0.008699}\PY{p}{,} \PY{l+m+mf}{0.00857}\PY{p}{,} \PY{l+m+mf}{0.00843}\PY{p}{,} \PY{l+m+mf}{0.008282}\PY{p}{,} \PY{l+m+mf}{0.008127}\PY{p}{,} \PY{l+m+mf}{0.00797}\PY{p}{,} \PY{l+m+mf}{0.007812}\PY{p}{,} \PY{l+m+mf}{0.007659}\PY{p}{,} \PY{l+m+mf}{0.007511}\PY{p}{,} \PY{l+m+mf}{0.007369}\PY{p}{,} \PY{l+m+mf}{0.007232}\PY{p}{,} \PY{l+m+mf}{0.007097}\PY{p}{,} \PY{l+m+mf}{0.006961}\PY{p}{,} \PY{l+m+mf}{0.006822}\PY{p}{,} \PY{l+m+mf}{0.006681}\PY{p}{,} \PY{l+m+mf}{0.006542}\PY{p}{,} \PY{l+m+mf}{0.006407}\PY{p}{,} \PY{l+m+mf}{0.006282}\PY{p}{,} \PY{l+m+mf}{0.00617}\PY{p}{,} \PY{l+m+mf}{0.006073}\PY{p}{,} \PY{l+m+mf}{0.005994}\PY{p}{,} \PY{l+m+mf}{0.005933}\PY{p}{,} \PY{l+m+mf}{0.005889}\PY{p}{,} \PY{l+m+mf}{0.00586}\PY{p}{,} \PY{l+m+mf}{0.005843}\PY{p}{,} \PY{l+m+mf}{0.005836}\PY{p}{,} \PY{l+m+mf}{0.005836}\PY{p}{,} \PY{l+m+mf}{0.005841}\PY{p}{,} \PY{l+m+mf}{0.005848}\PY{p}{,} \PY{l+m+mf}{0.005859}\PY{p}{,} \PY{l+m+mf}{0.005873}\PY{p}{,} \PY{l+m+mf}{0.005895}\PY{p}{,} \PY{l+m+mf}{0.005927}\PY{p}{,} \PY{l+m+mf}{0.005971}\PY{p}{,} \PY{l+m+mf}{0.006027}\PY{p}{,} \PY{l+m+mf}{0.006092}\PY{p}{,} \PY{l+m+mf}{0.006165}\PY{p}{]}\PY{p}{;}
+         \PY{n}{JPNbirthrates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0173}\PY{p}{,} \PY{l+m+mf}{0.017}\PY{p}{,} \PY{l+m+mf}{0.0171}\PY{p}{,} \PY{l+m+mf}{0.0174}\PY{p}{,} \PY{l+m+mf}{0.0178}\PY{p}{,} \PY{l+m+mf}{0.0187}\PY{p}{,} \PY{l+m+mf}{0.0138}\PY{p}{,} \PY{l+m+mf}{0.0194}\PY{p}{,} \PY{l+m+mf}{0.0187}\PY{p}{,} \PY{l+m+mf}{0.0185}\PY{p}{,} \PY{l+m+mf}{0.0187}\PY{p}{,} \PY{l+m+mf}{0.0191}\PY{p}{,} \PY{l+m+mf}{0.0192}\PY{p}{,} \PY{l+m+mf}{0.0194}\PY{p}{,} \PY{l+m+mf}{0.0184}\PY{p}{,} \PY{l+m+mf}{0.017}\PY{p}{,} \PY{l+m+mf}{0.0162}\PY{p}{,} \PY{l+m+mf}{0.0154}\PY{p}{,} \PY{l+m+mf}{0.0148}\PY{p}{,} \PY{l+m+mf}{0.0141}\PY{p}{,} \PY{l+m+mf}{0.0135}\PY{p}{,} \PY{l+m+mf}{0.013}\PY{p}{,} \PY{l+m+mf}{0.0128}\PY{p}{,} \PY{l+m+mf}{0.0127}\PY{p}{,} \PY{l+m+mf}{0.0125}\PY{p}{,} \PY{l+m+mf}{0.0119}\PY{p}{,} \PY{l+m+mf}{0.0114}\PY{p}{,} \PY{l+m+mf}{0.0111}\PY{p}{,} \PY{l+m+mf}{0.0108}\PY{p}{,} \PY{l+m+mf}{0.0102}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mf}{0.0099}\PY{p}{,} \PY{l+m+mf}{0.0098}\PY{p}{,} \PY{l+m+mf}{0.0096}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mf}{0.00954}\PY{p}{,} \PY{l+m+mf}{0.0096}\PY{p}{,} \PY{l+m+mf}{0.0095}\PY{p}{,} \PY{l+m+mf}{0.0096}\PY{p}{,} \PY{l+m+mf}{0.0093}\PY{p}{,} \PY{l+m+mf}{0.0094}\PY{p}{,} \PY{l+m+mf}{0.0093}\PY{p}{,} \PY{l+m+mf}{0.0093}\PY{p}{,} \PY{l+m+mf}{0.0092}\PY{p}{,} \PY{l+m+mf}{0.008693605}\PY{p}{,} \PY{l+m+mf}{0.008413292}\PY{p}{,} \PY{l+m+mf}{0.00865}\PY{p}{,} \PY{l+m+mf}{0.00863}\PY{p}{,} \PY{l+m+mf}{0.0087}\PY{p}{,} \PY{l+m+mf}{0.0085}\PY{p}{,} \PY{l+m+mf}{0.0085}\PY{p}{,} \PY{l+m+mf}{0.0083}\PY{p}{,} \PY{l+m+mf}{0.0082}\PY{p}{,} \PY{l+m+mf}{0.0082}\PY{p}{,} \PY{l+m+mf}{0.008}\PY{p}{,} \PY{l+m+mf}{0.008}\PY{p}{,} \PY{l+m+mf}{0.0078}\PY{p}{]}\PY{p}{;}
+         \PY{n}{JPNdeathrates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0076}\PY{p}{,} \PY{l+m+mf}{0.0074}\PY{p}{,} \PY{l+m+mf}{0.0075}\PY{p}{,} \PY{l+m+mf}{0.007}\PY{p}{,} \PY{l+m+mf}{0.0069}\PY{p}{,} \PY{l+m+mf}{0.0071}\PY{p}{,} \PY{l+m+mf}{0.0068}\PY{p}{,} \PY{l+m+mf}{0.0067}\PY{p}{,} \PY{l+m+mf}{0.0068}\PY{p}{,} \PY{l+m+mf}{0.0068}\PY{p}{,} \PY{l+m+mf}{0.0069}\PY{p}{,} \PY{l+m+mf}{0.0065}\PY{p}{,} \PY{l+m+mf}{0.0064}\PY{p}{,} \PY{l+m+mf}{0.0066}\PY{p}{,} \PY{l+m+mf}{0.0064}\PY{p}{,} \PY{l+m+mf}{0.0062}\PY{p}{,} \PY{l+m+mf}{0.0062}\PY{p}{,} \PY{l+m+mf}{0.006}\PY{p}{,} \PY{l+m+mf}{0.006}\PY{p}{,} \PY{l+m+mf}{0.0059}\PY{p}{,} \PY{l+m+mf}{0.0061}\PY{p}{,} \PY{l+m+mf}{0.0061}\PY{p}{,} \PY{l+m+mf}{0.006}\PY{p}{,} \PY{l+m+mf}{0.0062}\PY{p}{,} \PY{l+m+mf}{0.0062}\PY{p}{,} \PY{l+m+mf}{0.0062}\PY{p}{,} \PY{l+m+mf}{0.0062}\PY{p}{,} \PY{l+m+mf}{0.0067}\PY{p}{,} \PY{l+m+mf}{0.0065}\PY{p}{,} \PY{l+m+mf}{0.0064}\PY{p}{,} \PY{l+m+mf}{0.0067}\PY{p}{,} \PY{l+m+mf}{0.0067}\PY{p}{,} \PY{l+m+mf}{0.0069}\PY{p}{,} \PY{l+m+mf}{0.0071}\PY{p}{,} \PY{l+m+mf}{0.0071}\PY{p}{,} \PY{l+m+mf}{0.00741}\PY{p}{,} \PY{l+m+mf}{0.0071}\PY{p}{,} \PY{l+m+mf}{0.0073}\PY{p}{,} \PY{l+m+mf}{0.0075}\PY{p}{,} \PY{l+m+mf}{0.0078}\PY{p}{,} \PY{l+m+mf}{0.0077}\PY{p}{,} \PY{l+m+mf}{0.0077}\PY{p}{,} \PY{l+m+mf}{0.0081}\PY{p}{,} \PY{l+m+mf}{0.0084}\PY{p}{,} \PY{l+m+mf}{0.00805086}\PY{p}{,} \PY{l+m+mf}{0.008530754}\PY{p}{,} \PY{l+m+mf}{0.00853}\PY{p}{,} \PY{l+m+mf}{0.00871}\PY{p}{,} \PY{l+m+mf}{0.0091}\PY{p}{,} \PY{l+m+mf}{0.0091}\PY{p}{,} \PY{l+m+mf}{0.0095}\PY{p}{,} \PY{l+m+mf}{0.0099}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mf}{0.0101}\PY{p}{,} \PY{l+m+mf}{0.0101}\PY{p}{,} \PY{l+m+mf}{0.0103}\PY{p}{,} \PY{l+m+mf}{0.0105}\PY{p}{]}\PY{p}{;}
+         \PY{n}{INAbirthrates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.04456}\PY{p}{,} \PY{l+m+mf}{0.044277}\PY{p}{,} \PY{l+m+mf}{0.043934}\PY{p}{,} \PY{l+m+mf}{0.043551}\PY{p}{,} \PY{l+m+mf}{0.043141}\PY{p}{,} \PY{l+m+mf}{0.04271}\PY{p}{,} \PY{l+m+mf}{0.04225}\PY{p}{,} \PY{l+m+mf}{0.041747}\PY{p}{,} \PY{l+m+mf}{0.041196}\PY{p}{,} \PY{l+m+mf}{0.040601}\PY{p}{,} \PY{l+m+mf}{0.039969}\PY{p}{,} \PY{l+m+mf}{0.039309}\PY{p}{,} \PY{l+m+mf}{0.038631}\PY{p}{,} \PY{l+m+mf}{0.037947}\PY{p}{,} \PY{l+m+mf}{0.037264}\PY{p}{,} \PY{l+m+mf}{0.036592}\PY{p}{,} \PY{l+m+mf}{0.035938}\PY{p}{,} \PY{l+m+mf}{0.0353}\PY{p}{,} \PY{l+m+mf}{0.03467}\PY{p}{,} \PY{l+m+mf}{0.034042}\PY{p}{,} \PY{l+m+mf}{0.0334}\PY{p}{,} \PY{l+m+mf}{0.032724}\PY{p}{,} \PY{l+m+mf}{0.032001}\PY{p}{,} \PY{l+m+mf}{0.031229}\PY{p}{,} \PY{l+m+mf}{0.030417}\PY{p}{,} \PY{l+m+mf}{0.029581}\PY{p}{,} \PY{l+m+mf}{0.028746}\PY{p}{,} \PY{l+m+mf}{0.027937}\PY{p}{,} \PY{l+m+mf}{0.027175}\PY{p}{,} \PY{l+m+mf}{0.026468}\PY{p}{,} \PY{l+m+mf}{0.025812}\PY{p}{,} \PY{l+m+mf}{0.025188}\PY{p}{,} \PY{l+m+mf}{0.024581}\PY{p}{,} \PY{l+m+mf}{0.023984}\PY{p}{,} \PY{l+m+mf}{0.023407}\PY{p}{,} \PY{l+m+mf}{0.022878}\PY{p}{,} \PY{l+m+mf}{0.022435}\PY{p}{,} \PY{l+m+mf}{0.0221}\PY{p}{,} \PY{l+m+mf}{0.021883}\PY{p}{,} \PY{l+m+mf}{0.021775}\PY{p}{,} \PY{l+m+mf}{0.021755}\PY{p}{,} \PY{l+m+mf}{0.021788}\PY{p}{,} \PY{l+m+mf}{0.021831}\PY{p}{,} \PY{l+m+mf}{0.021849}\PY{p}{,} \PY{l+m+mf}{0.021821}\PY{p}{,} \PY{l+m+mf}{0.02174}\PY{p}{,} \PY{l+m+mf}{0.021608}\PY{p}{,} \PY{l+m+mf}{0.021447}\PY{p}{,} \PY{l+m+mf}{0.021269}\PY{p}{,} \PY{l+m+mf}{0.021076}\PY{p}{,} \PY{l+m+mf}{0.020862}\PY{p}{,} \PY{l+m+mf}{0.020621}\PY{p}{,} \PY{l+m+mf}{0.020347}\PY{p}{,} \PY{l+m+mf}{0.02004}\PY{p}{,} \PY{l+m+mf}{0.019705}\PY{p}{,} \PY{l+m+mf}{0.01935}\PY{p}{,} \PY{l+m+mf}{0.018986}\PY{p}{]}\PY{p}{;}
+         \PY{n}{INAdeathrates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.018011}\PY{p}{,} \PY{l+m+mf}{0.017513}\PY{p}{,} \PY{l+m+mf}{0.017016}\PY{p}{,} \PY{l+m+mf}{0.016522}\PY{p}{,} \PY{l+m+mf}{0.016037}\PY{p}{,} \PY{l+m+mf}{0.01556}\PY{p}{,} \PY{l+m+mf}{0.01509}\PY{p}{,} \PY{l+m+mf}{0.014624}\PY{p}{,} \PY{l+m+mf}{0.014164}\PY{p}{,} \PY{l+m+mf}{0.01371}\PY{p}{,} \PY{l+m+mf}{0.013265}\PY{p}{,} \PY{l+m+mf}{0.012835}\PY{p}{,} \PY{l+m+mf}{0.012422}\PY{p}{,} \PY{l+m+mf}{0.012028}\PY{p}{,} \PY{l+m+mf}{0.011655}\PY{p}{,} \PY{l+m+mf}{0.011304}\PY{p}{,} \PY{l+m+mf}{0.010975}\PY{p}{,} \PY{l+m+mf}{0.010664}\PY{p}{,} \PY{l+m+mf}{0.01037}\PY{p}{,} \PY{l+m+mf}{0.010091}\PY{p}{,} \PY{l+m+mf}{0.009827}\PY{p}{,} \PY{l+m+mf}{0.009578}\PY{p}{,} \PY{l+m+mf}{0.009344}\PY{p}{,} \PY{l+m+mf}{0.009124}\PY{p}{,} \PY{l+m+mf}{0.008918}\PY{p}{,} \PY{l+m+mf}{0.008724}\PY{p}{,} \PY{l+m+mf}{0.008542}\PY{p}{,} \PY{l+m+mf}{0.008371}\PY{p}{,} \PY{l+m+mf}{0.00821}\PY{p}{,} \PY{l+m+mf}{0.00806}\PY{p}{,} \PY{l+m+mf}{0.007918}\PY{p}{,} \PY{l+m+mf}{0.007784}\PY{p}{,} \PY{l+m+mf}{0.007658}\PY{p}{,} \PY{l+m+mf}{0.007541}\PY{p}{,} \PY{l+m+mf}{0.007435}\PY{p}{,} \PY{l+m+mf}{0.007346}\PY{p}{,} \PY{l+m+mf}{0.007281}\PY{p}{,} \PY{l+m+mf}{0.007243}\PY{p}{,} \PY{l+m+mf}{0.00723}\PY{p}{,} \PY{l+m+mf}{0.007239}\PY{p}{,} \PY{l+m+mf}{0.007262}\PY{p}{,} \PY{l+m+mf}{0.00729}\PY{p}{,} \PY{l+m+mf}{0.007313}\PY{p}{,} \PY{l+m+mf}{0.007325}\PY{p}{,} \PY{l+m+mf}{0.007321}\PY{p}{,} \PY{l+m+mf}{0.0073}\PY{p}{,} \PY{l+m+mf}{0.007266}\PY{p}{,} \PY{l+m+mf}{0.007225}\PY{p}{,} \PY{l+m+mf}{0.007184}\PY{p}{,} \PY{l+m+mf}{0.007146}\PY{p}{,} \PY{l+m+mf}{0.007115}\PY{p}{,} \PY{l+m+mf}{0.007092}\PY{p}{,} \PY{l+m+mf}{0.007079}\PY{p}{,} \PY{l+m+mf}{0.007075}\PY{p}{,} \PY{l+m+mf}{0.00708}\PY{p}{,} \PY{l+m+mf}{0.007096}\PY{p}{,} \PY{l+m+mf}{0.007122}\PY{p}{]}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Updates the population based on US birth/death rates after 1979.    }
+         \PY{l+s+sd}{    pop \PYZhy{} current population}
+         \PY{l+s+sd}{    t \PYZhy{} current year}
+         \PY{l+s+sd}{    returns the next years population}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{k}{def} \PY{n+nf}{updateUS}\PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{)}\PY{p}{:}
+             \PY{n}{t} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{k}{if} \PY{n}{t} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1979}\PY{p}{:}
+                 \PY{n}{birthrate} \PY{o}{=} \PY{n}{birthrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+                 \PY{n}{deathrate} \PY{o}{=} \PY{n}{deathrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{birthrate} \PY{o}{=} \PY{n}{USbirthrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+                 \PY{n}{deathrate} \PY{o}{=} \PY{n}{USdeathrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+             \PY{n}{growth1} \PY{o}{=} \PY{n}{pop} \PY{o}{*} \PY{n}{birthrate}
+             \PY{n}{deaths} \PY{o}{=} \PY{n}{deathrate} \PY{o}{*} \PY{n}{pop}
+             \PY{k}{return} \PY{n}{pop} \PY{o}{+} \PY{n}{growth1} \PY{o}{\PYZhy{}} \PY{n}{deaths}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{resultsUS} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{updateUS}\PY{p}{)}
+         \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{resultsUS}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chinese Population Model based on US Growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Updates the population based on Brazilian birth/death rates after 1979.    }
+         \PY{l+s+sd}{    pop \PYZhy{} current population}
+         \PY{l+s+sd}{    t \PYZhy{} current year}
+         \PY{l+s+sd}{    returns the next years population}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{k}{def} \PY{n+nf}{updateBRZ}\PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{)}\PY{p}{:}
+             \PY{n}{t} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{k}{if} \PY{n}{t} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1979}\PY{p}{:}
+                 \PY{n}{birthrate} \PY{o}{=} \PY{n}{birthrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+                 \PY{n}{deathrate} \PY{o}{=} \PY{n}{deathrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{birthrate} \PY{o}{=} \PY{n}{BRZbirthrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+                 \PY{n}{deathrate} \PY{o}{=} \PY{n}{BRZdeathrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+             \PY{n}{growth1} \PY{o}{=} \PY{n}{pop} \PY{o}{*} \PY{n}{birthrate}
+             \PY{n}{deaths} \PY{o}{=} \PY{n}{deathrate} \PY{o}{*} \PY{n}{pop}
+             \PY{k}{return} \PY{n}{pop} \PY{o}{+} \PY{n}{growth1} \PY{o}{\PYZhy{}} \PY{n}{deaths}
+         \PY{k}{def} \PY{n+nf}{runsimulation}\PY{p}{(}\PY{n}{system}\PY{p}{)}\PY{p}{:}
+             \PY{n}{results} \PY{o}{=} \PY{n}{TimeSeries}\PY{p}{(}\PY{p}{)}
+             \PY{n}{results}\PY{p}{[}\PY{n}{system}\PY{o}{.}\PY{n}{t0}\PY{p}{]} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{pop}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{linrange}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t0}\PY{p}{,} \PY{n}{system}\PY{o}{.}\PY{n}{tf}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{results}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{updateBRZ}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{n}{system}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{results}\PY{p}{)}
+             \PY{k}{return} \PY{n}{results}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{resultsBRZ} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{updateBRZ}\PY{p}{)}
+         \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{resultsBRZ}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chinese Population Model based on BRZ Growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Updates the population based on Japanese birth/death rates after 1979.    }
+         \PY{l+s+sd}{    pop \PYZhy{} current population}
+         \PY{l+s+sd}{    t \PYZhy{} current year}
+         \PY{l+s+sd}{    returns the next years population}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{k}{def} \PY{n+nf}{updateJPN}\PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{)}\PY{p}{:}
+             \PY{n}{t} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{k}{if} \PY{n}{t} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1979}\PY{p}{:}
+                 \PY{n}{birthrate} \PY{o}{=} \PY{n}{birthrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+                 \PY{n}{deathrate} \PY{o}{=} \PY{n}{deathrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{birthrate} \PY{o}{=} \PY{n}{JPNbirthrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+                 \PY{n}{deathrate} \PY{o}{=} \PY{n}{JPNdeathrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+             \PY{n}{growth1} \PY{o}{=} \PY{n}{pop} \PY{o}{*} \PY{n}{birthrate}
+             \PY{n}{deaths} \PY{o}{=} \PY{n}{deathrate} \PY{o}{*} \PY{n}{pop}
+             \PY{k}{return} \PY{n}{pop} \PY{o}{+} \PY{n}{growth1} \PY{o}{\PYZhy{}} \PY{n}{deaths}
+         \PY{k}{def} \PY{n+nf}{runsimulation}\PY{p}{(}\PY{n}{system}\PY{p}{)}\PY{p}{:}
+             \PY{n}{resultsJPN} \PY{o}{=} \PY{n}{TimeSeries}\PY{p}{(}\PY{p}{)}
+             \PY{n}{resultsJPN}\PY{p}{[}\PY{n}{system}\PY{o}{.}\PY{n}{t0}\PY{p}{]} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{pop}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{linrange}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t0}\PY{p}{,} \PY{n}{system}\PY{o}{.}\PY{n}{tf}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{resultsJPN}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{updateJPN}\PY{p}{(}\PY{n}{resultsJPN}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{n}{system}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{resultsJPN}\PY{p}{)}
+             \PY{k}{return} \PY{n}{resultsJPN}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{resultsJPN} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{updateJPN}\PY{p}{)}
+         \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{resultsJPN}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chinese Population Model based on JPN Growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Updates the population based on Indonesian birth/death rates after 1979.    }
+         \PY{l+s+sd}{    pop \PYZhy{} current population}
+         \PY{l+s+sd}{    t \PYZhy{} current year}
+         \PY{l+s+sd}{    returns the next years population}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{k}{def} \PY{n+nf}{updateINA}\PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{)}\PY{p}{:}
+             \PY{n}{t} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{k}{if} \PY{n}{t} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1979}\PY{p}{:}
+                 \PY{n}{birthrate} \PY{o}{=} \PY{n}{birthrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+                 \PY{n}{deathrate} \PY{o}{=} \PY{n}{deathrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{birthrate} \PY{o}{=} \PY{n}{INAbirthrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+                 \PY{n}{deathrate} \PY{o}{=} \PY{n}{INAdeathrates}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1960}\PY{p}{]}
+             \PY{n}{growth1} \PY{o}{=} \PY{n}{pop} \PY{o}{*} \PY{n}{birthrate}
+             \PY{n}{deaths} \PY{o}{=} \PY{n}{deathrate} \PY{o}{*} \PY{n}{pop}
+             \PY{k}{return} \PY{n}{pop} \PY{o}{+} \PY{n}{growth1} \PY{o}{\PYZhy{}} \PY{n}{deaths}
+         \PY{k}{def} \PY{n+nf}{runsimulation}\PY{p}{(}\PY{n}{system}\PY{p}{)}\PY{p}{:}
+             \PY{n}{results} \PY{o}{=} \PY{n}{TimeSeries}\PY{p}{(}\PY{p}{)}
+             \PY{n}{results}\PY{p}{[}\PY{n}{system}\PY{o}{.}\PY{n}{t0}\PY{p}{]} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{pop}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{linrange}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t0}\PY{p}{,} \PY{n}{system}\PY{o}{.}\PY{n}{tf}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{results}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{updateINA}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{n}{system}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{results}\PY{p}{)}
+             \PY{k}{return} \PY{n}{results}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{resultsINA} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{updateINA}\PY{p}{)}
+         \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{resultsINA}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chinese Population Model based on INA Growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Plots all predictions, along with the historical population and our model of Chinese population under the one child policy.}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}results2}\PY{p}{(}\PY{n}{CNtimeseries}\PY{p}{,} \PY{n}{UStimeseries}\PY{p}{,} \PY{n}{JPNtimeseries}\PY{p}{,} \PY{n}{INAtimeseries}\PY{p}{,} \PY{n}{BRZtimeseries}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{CNtimeseries}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CNA model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{UStimeseries}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{US model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{JPNtimeseries}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{JPN model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{INAtimeseries}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{INA model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{BRZtimeseries}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BRZ model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{popstats}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Historical Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chinese Population (billions)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{n}{title}\PY{o}{=}\PY{n}{title}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{plot\PYZus{}results2}\PY{p}{(}\PY{n}{results}\PY{p}{,} \PY{n}{resultsUS}\PY{p}{,} \PY{n}{resultsJPN}\PY{p}{,} \PY{n}{resultsINA}\PY{p}{,} \PY{n}{resultsBRZ}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chinese Population Predictions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{resultsUS}\PY{p}{[}\PY{l+m+mi}{2016}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1204129496.7779598
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Results: The graph above displays the results of each of our four
+predictions based on each of the four countries we decided to model
+Chinese population growth off of in the years of the one child policy.
+We selected each country based on its similarities to China: the United
+States' geographic size and population, Japan's economic stature and
+region, Indonesia's population, population growth, and development
+level, and Brazil's population, population growth, geographical size,
+and development level. The Indonesian and Brazilian growth models showed
+China's population growing to 1.76 billion and 1.68 billion respectively
+by 2016, well above the current Chinese population of 1.41 billion. The
+Japanese and U.S. growth models showed China's population growing to
+1.04 billion and 1.20 billion respectively by 2016, below China's
+current population of 1.41 billion.
+
+    Interpretation: We chose each of these countries based on their
+different perceived similarities. We believed if the countries were each
+similar to China, then China's population growth could be modeled off of
+the population growth of each through the period of the one child
+policy, predicting the possible population of China had the policy not
+been instituted in 1979. We believe the Indonesian and Brazilian growth
+models most realistically represent the potential increases in Chinese
+population. Indonesia and Brazil each have very large land areas similar
+to China's, similar development levels (as measured by HDI), and
+similarly large populations (all within the top five in the world).
+Therefore, we predict that without the one child policy, China's
+population could have inflated to anywhere from 1.68 billion to 1.76
+billion, far above China's true population of 1.41 billion. This model
+does have shortcomings. We assumed that China would continue to grow as
+quickly as Indonesia and Brazil after 1979 without the one child policy,
+ignoring the already decelerating population growth of China.
+Additionally, we could not factor in the changing conditions in China
+that could have contributed to a lower birthrate than either Brazil or
+Indonesia.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
